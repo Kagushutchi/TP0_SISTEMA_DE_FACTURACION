@@ -1,8 +1,8 @@
 ##TPO-Pre-Entrega-Sistema de Facturacion
 
 ##Integrantes:
-*De biase Dion Ramiro
-*Jofre Maximo Ezequiel
+* **De biase Dion Ramiro
+* **Jofre Maximo Ezequiel
 
 ## Dependencias usadas
 * **Python 3.x**
