@@ -1,5 +1,9 @@
 ##TPO-Pre-Entrega-Sistema de Facturacion
 
+##Integrantes:
+*De biase Dion Ramiro
+*Jofre Maximo Ezequiel
+
 ## Dependencias usadas
 * **Python 3.x**
 * **Pandas**: Para la lectura, manipulación y limpieza de los datasets.
