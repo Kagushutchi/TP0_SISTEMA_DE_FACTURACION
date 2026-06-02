@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 
 #Colocar los datos de conexión a tu base de datos MySQL
 USER = "root"
-PASSWORD = "contraseña" 
+PASSWORD = "eze2466" 
 HOST = "localhost"
 PORT = "3306" 
 DATABASE = "sistema_facturacion"
@@ -22,6 +22,5 @@ def importar_csv(archivo, tabla):
 #No cambiar el orden de las importaciones, ya que hay relaciones entre las tablas
 importar_csv('e01_cliente.csv', 'E01_CLIENTE')
 importar_csv('e01_producto.csv', 'E01_PRODUCTO')
-importar_csv('e01_telefono.csv', 'E01_TELEFONO')
 importar_csv('e01_factura.csv', 'E01_FACTURA')
 importar_csv('e01_detalle_factura.csv', 'E01_DETALLE_FACTURA')
