@@ -88,6 +88,53 @@ SELECT C.APELLIDO, C.NOMBRE, count(F.nro_factura) AS Cantidad__facturas FROM E01
 LEFT JOIN E01_FACTURA F ON C.nro_cliente = F.nro_cliente
 group by C.nro_cliente;
 
-# 7 
+# 7 Listar los datos de todas las facturas que hayan sido compradas por el cliente de nombre "Kai" y apellido "Bullock". 
+
+SELECT C.APELLIDO, C.NOMBRE, F.* FROM E01_CLIENTE C right JOIN E01_FACTURA F 
+ON C.nro_cliente = F.nro_cliente WHERE C.APELLIDO="Bullock"and C.NOMBRE="KAI";
+
+# 8  Seleccionar los productos que han sido facturados al menos 1 vez. 
+
+SELECT P.* FROM E01_PRODUCTO P where exists
+(SELECT * FROM E01_FACTURA F JOIN E01_DETALLE_FACTURA D 
+ON F.nro_factura=D.nro_factura 
+where D.codigo_producto=P.codigo_producto);
+
+# 9 Listar los datos de todas las facturas que contengan productos de las marcas “Ipsum”.
+
+SELECT F.* FROM E01_FACTURA F where exists (
+SELECT * FROM E01_DETALLE_FACTURA D 
+JOIN E01_PRODUCTO P ON F.nro_factura=D.nro_factura 
+WHERE D.codigo_producto=P.codigo_producto and P.marca LIKE "%Ipsum%"
+);
+
+# 10 Mostrar nombre y apellido de cada cliente junto con lo que gastó en total, con IVA incluido.
+
+SELECT C.nombre , C.apellido, FORMAT(SUM(F.total_con_iva),2) AS Total 
+FROM E01_CLIENTE C JOIN E01_FACTURA F on C.nro_cliente=F.nro_cliente
+group by C.nro_cliente
+having Total>=1;
+
+# 11 Generar una vista para mostrar los datos de las facturas ordenaods por fechas
+CREATE VIEW facturas AS
+SELECT F.* FROM E01_FACTURA F 
+where total_sin_iva >=1 and total_con_iva>=1 
+order by F.fecha DESC ;
+
+# 12 Generar una vista para mostrar los datos de los productos que no esten en la lista
+CREATE VIEW prodcutos_no_facturados AS
+SELECT P.* FROM E01_PRODUCTO  P  WHERE NOT EXISTS(
+SELECT * FROM E01_DETALLE_FACTURA D 
+WHERE P.codigo_producto=D.codigo_producto
+);
+
+SELECT P.* 
+FROM E01_PRODUCTO P
+LEFT JOIN E01_DETALLE_FACTURA D 
+    ON P.codigo_producto = D.codigo_producto
+WHERE D.codigo_producto IS NULL;
+
+# 13 Crear
+
 
 
