@@ -3,7 +3,7 @@ USE sistema_facturacion;
 
 
 CREATE TABLE E01_CLIENTE (
-    nro_cliente INT PRIMARY KEY,
+    nro_cliente INT PRIMARY KEY auto_increment,
     nombre VARCHAR(45),
     apellido VARCHAR(45),
     direccion VARCHAR(45),
@@ -134,7 +134,33 @@ LEFT JOIN E01_DETALLE_FACTURA D
     ON P.codigo_producto = D.codigo_producto
 WHERE D.codigo_producto IS NULL;
 
-# 13 Crear
+# 13 Implementar la funcionalidad que permita crear nuevos clientes, eliminar y modificar los ya existentes
 
+#insercion de cliente 
+DELIMITER //
+CREATE PROCEDURE inserta_cliente(IN nombre2 VARCHAR(45), IN apellido2 VARCHAR(45),IN direccion2 VARCHAR(45),IN activo2 tinyint)
+begin
+	INSERT INTO E01_CLIENTE(nombre,apellido,direccion,activo) VALUES (nombre2, apellido2, direccion2, activo2);
+END //
+DELIMITER ;
 
+call inserta_cliente('Pepito','Grillo','Nose', 1); # PRUEBA DE INSERCION
 
+DELIMITER //
+CREATE PROCEDURE eliminar_cliente(IN ID INT)#Falta hacer el trigger para que se pueda realizar este procedure
+BEGIN
+DELETE FROM E01_CLIENTE WHERE nro_cliente = ID; 
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER antes_de_eliminar #Todavia sin terminar 
+BEFORE DELETE ON E01_CLIENTE 
+FOR EACH ROW
+BEGIN
+
+END//
+DELIMITER ;
+
+#PARA El punto 13 y 14 hay que definir procedures para cada accion insert,update o delete, 
+#ademas hay que hacer un trigger en base a eliminir un cliente 
