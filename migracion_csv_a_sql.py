@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 
 #Colocar los datos de conexión a tu base de datos MySQL
 USER = "root"
-PASSWORD = "contraseña" 
+PASSWORD = "1234" 
 HOST = "localhost"
 PORT = "3306" 
 DATABASE = "sistema_facturacion"
